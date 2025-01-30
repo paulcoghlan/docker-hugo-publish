@@ -24,7 +24,6 @@ ARG HUGO_SITE_REPO
 RUN git clone --recurse-submodules --depth 1 $HUGO_SITE_REPO .
 
 # temp debugging 
-# docker build --no-cache -t debug-hugo .
 CMD ["bash"]
 
 # RUN hugo 

@@ -2,8 +2,10 @@
 
 ## Development
 ```
-docker build --no-cache --build-arg HUGO_SITE_REPO=https://github.com/paulcoghlan/pixse1.git -t hugo-nginx .
+docker build --no-cache --target builder --build-arg HUGO_SITE_REPO=https://github.com/paulcoghlan/pixse1.git -t hugo-nginx .
 docker run -it hugo-nginx
+
+% hugo server --bind 0.0.0.0 --baseURL=http://localhost:1313 --appendPort=false
 ```
 
 ## Deployment
