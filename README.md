@@ -1,6 +1,18 @@
 # README
 
-## Development
+## Setup
+
+Ensure you have theme submodule:
+```
+/home2/paul/tools/docker-hugo-publish > git submodule update --init --recursive
+```
+
+## Development using compose:
+```
+BASE_URL=http://your-server:1313 docker compose up --build
+```
+
+## Development using docker only:
 ```
 docker build --no-cache --target builder --build-arg HUGO_SITE_REPO=https://github.com/paulcoghlan/pixse1.git -t hugo-nginx .
 docker run -it hugo-nginx

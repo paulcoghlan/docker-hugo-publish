@@ -3,7 +3,7 @@ FROM debian:bullseye-slim as builder
 
 # Set environment variables
 ENV HUGO_VERSION 0.142.0
-ENV HUGO_BINARY hugo_extended_${HUGO_VERSION}_Linux-arm64.deb
+ENV HUGO_BINARY hugo_extended_${HUGO_VERSION}_Linux-amd64.deb
 
 # Install dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -22,7 +22,7 @@ WORKDIR /site
 # Copy build.sh to container and execute 
 COPY build.sh ./
 
-RUN chmod +x build.sh v
+RUN chmod +x build.sh 
 
 # RUN build.sh 
 CMD ["./build.sh"]

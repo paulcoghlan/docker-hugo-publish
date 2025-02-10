@@ -1,3 +1,4 @@
 #!/bin/bash
 
-hugo server --bind 0.0.0.0 --baseURL=http://localhost:1313 --appendPort=false
+# Server command 
+hugo server -D --bind 0.0.0.0 --source=/source --renderStaticToDisk --baseURL=$BASE_URL --appendPort=false
