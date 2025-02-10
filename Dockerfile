@@ -19,24 +19,23 @@ RUN apt-get install -y ./${HUGO_BINARY} && \
 # Set working directory
 WORKDIR /site
 
-# Clone the Hugo site repository
-ARG HUGO_SITE_REPO
-RUN git clone --recurse-submodules --depth 1 $HUGO_SITE_REPO .
+# Copy build.sh to container and execute 
+COPY build.sh ./
 
-# temp debugging 
-CMD ["bash"]
+RUN chmod +x build.sh v
 
-# RUN hugo 
+# RUN build.sh 
+CMD ["./build.sh"]
 
-# Stage 2: Serve the site
-FROM nginx:alpine
 
-# Copy the built site from the previous stage
-COPY --from=builder /site/public /usr/share/nginx/html
+# # Stage 2: Serve the site
+# FROM nginx:alpine
 
-# Expose the port used by NGINX
-EXPOSE 80
+# # Copy the built site from the previous stage
+# COPY --from=builder /site/public /usr/share/nginx/html
 
-# Start the NGINX server
-CMD ["nginx", "-g", "daemon off;"]
+# # Expose the port used by NGINX
+# EXPOSE 80
+
+# # Start the NGINX server
 
