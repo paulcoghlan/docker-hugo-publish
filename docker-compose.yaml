@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  hugo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "1313:1313"
+    volumes:
+      - /home2/paul/pixse1:/source
+    command: /site/build.sh
+    environment: 
+      - BASE_URL=${BASE_URL}
+
