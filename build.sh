@@ -5,4 +5,4 @@
 #
 # Build command
 #
-hugo --source=/source
+hugo --source=/source  --templateMetrics --templateMetricsHints
