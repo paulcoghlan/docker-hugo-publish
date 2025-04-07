@@ -7,14 +7,23 @@ ENV HUGO_BINARY hugo_extended_${HUGO_VERSION}_Linux-amd64.deb
 
 # Install dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    wget \
-    vim-tiny \
-    git \
-    ca-certificates && \
-    wget https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/${HUGO_BINARY} 
+curl \
+vim-tiny \
+git \
+ca-certificates && \
+curl -L https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/${HUGO_BINARY} -o ${HUGO_BINARY}    
 
 RUN apt-get install -y ./${HUGO_BINARY} && \
     rm -rf /var/lib/apt/lists/* ${HUGO_BINARY}
+
+# Add Google Cloud SDK distribution URI as a package source
+RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+
+# Import Google Cloud public key
+RUN curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
+
+# Install the Google Cloud SDK
+RUN apt-get update && apt-get install -y google-cloud-sdk
 
 # Set working directory
 WORKDIR /site
